@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Diseño DuocUC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+    :root {
+        --typography-headings: 'Merriweather';
+        --typography-paragraph: 'Lato'; /*'Open Sans';*/
+
+        --size-h1: 2.6875rem;
+        --size-h2: 2.1rem;
+        --size-h3: 1.5rem;
+        --size-h4: 1.25rem;
+        --size-h5: 1rem;
+        --size-paragraph: 1rem;
+        --size-text-small: 0.6875rem;
+
+        --color-primary: #FFB800;
+        --color-secondary: #EDF000;
+        --color-text-light: #fff;
+        --color-text-dark: #000;
+    }
+
+    h1 {
+        font-size: var(--size-h1);
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-weight: bold;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: var(--typography-headings);
+    }
+
+    p {
+        font-family: var(--typography-paragraph);
+        font-size: var(--size-paragraph);
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    ul,
+    ol {
+        list-style: none;
+    }
+
+    /* NAV */
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 20;
+
+        .logo-nav-mobile {
+            display: none;
+        }
+    }
+
+    .nav-secondary {
+        background-color: #E1E0DD;
+
+
+        .navbar-nav {
+            gap: .5rem;
+
+            .nav-link {
+                color: #000;
+                font-size: var(--size-text-small);
+                padding: .2rem .5rem;
+                position: relative;
+                display: flex;
+                align-items: center;
+                text-transform: uppercase;
+                font-family: var(--typography-paragraph);
+            }
+        }
+
+    }
+
+    .btn-nav-icon1 a::before,
+    .btn-nav-icon2 a::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 1em;
+        height: 1em;
+        left: -7px;
+    }
+
+    .btn-nav-icon1 a::before {
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 0 1 18 0Z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") no-repeat center;
+    }
+
+    .btn-nav-icon2 a::before {
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'%3E%3Crect x='1' y='4' width='22' height='16' rx='2' ry='2'/%3E%3Cline x1='1' y1='10' x2='23' y2='10'/%3E%3C/svg%3E") no-repeat center;
+    }
+
+    .btn-nav-border a {
+        border: solid 1px rgb(0 0 0 / 70%);
+        color: rgb(0 0 0 / 70%) !important;
+        border-radius: 100px;
+        font-weight: 600;
+        padding: 6px 40px 6px 12px !important;
+
+        &::after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            width: 1em;
+            height: 1em;
+            right: 9px;
+            font-size: 1.4rem;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E") no-repeat center;
+            color: rgb(0 0 0 / 30%);
+        }
+
+        &:hover {
+            color: #000 !important;
+
+            &::after {
+                color: #000;
+            }
+        }
+
+        &:focus {
+            color: #fff !important;
+            background-color: #000;
+
+            &::after {
+                background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23ffffff' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E") no-repeat center;
+            }
+        }
+    }
+
+    .btn-nav-bg a {
+        background-color: #81db21;
+        border: rgba(97, 187, 1, 1);
+        color: #000;
+        border-radius: 100px;
+        padding: 0.5rem .5rem !important;
+        font-weight: 600;
+
+        &:hover {
+            box-shadow: 0px 0px 6px 2px rgba(97, 187, 1, 0.5);
+        }
+    }
+
+    /* Nav primary */
+    .nav-primary {
+        justify-content: space-between;
+
+        .logo-nav {
+            padding: 0 1rem;
+
+            img {
+                width: 100%;
+            }
+
+            .logo-primary {
+                width: 74%;
+                padding: .5rem 0;
+            }
+        }
+
+        .navbar-nav {
+            background-color: #000;
+            position: relative;
+            gap: 2rem;
+
+            &::before {
+                content: '';
+                width: 0;
+                height: 0;
+                border-top: 67px solid #000;
+                border-left: 60px solid transparent;
+                position: absolute;
+                left: -60px;
+                top: 0px;
+            }
+
+            .dropdown {
+                display: flex;
+                align-items: center;
+            }
+
+            .nav-link {
+                color: #fff;
+                text-transform: uppercase;
+                font-family: var(--typography-paragraph);
+                font-size: 1rem;
+                font-weight: 400;
+
+                &:hover {
+                    color: #919191 !important;
+                }
+            }
+
+            .nav-link.show {
+                color: #919191 !important;
+            }
+
+            .dropdown-menu {
+                border-radius: 0px;
+                background-color: #000;
+
+                .dropdown-item {
+                    color: #fff;
+                    font-family: var(--typography-paragraph);
+                    font-size: var(--size-text);
+
+                    &:hover {
+                        color: #000;
+                    }
+
+                    &:focus {
+                        background-color: #fff;
+                        color: #000;
+                    }
+                }
+            }
+
+            .nav-destacado {
+                background-color: var(--color-primary);
+                margin-left: 50px;
+                padding-right: 1.5rem;
+                position: relative;
+
+                &::before {
+                    content: '';
+                    width: 0;
+                    height: 0;
+                    border-top: 67px solid var(--color-primary);
+                    border-left: 60px solid transparent;
+                    position: absolute;
+                    left: -60px;
+                    top: 0px;
+                }
+
+                .nav-link {
+                    color: #000;
+                    font-weight: 600;
+
+                    &:hover {
+                        color: #000 !important;
+                    }
+                }
+
+                .dropdown-menu {
+                    left: auto;
+                    right: 0;
+
+                    .dropdown-item {
+                        padding-right: 3rem;
+                        font-family: var(--typography-paragraph);
+
+                        &::before {
+                            display: none;
+                        }
+                    }
+                }
+
+                .dropdown-menu .destacado {
+                    background-color: var(--color-primary);
+
+                    .dropdown-item {
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
+
+    .dropdown-menu[data-bs-popper] {
+        top: 59px;
+    }
+
+    .dropdown-item::before {
+        content: "";
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        margin-right: 0.5em;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23ffffff' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpolyline points='13 17 18 12 13 7'/%3E%3Cpolyline points='6 17 11 12 6 7'/%3E%3C/svg%3E") no-repeat center;
+    }
+
+    .sub-menu {
+        list-style: none;
+        padding: 0;
+
+        .dropdown-item::before {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23ffffff' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M15 10l5 5-5 5'/%3E%3Cpath d='M4 4v7a4 4 0 0 0 4 4h12'/%3E%3C/svg%3E") no-repeat center;
+        }
+    }
+
+    .navbar-toggler {
+        border: none;
+
+        &:focus {
+            box-shadow: 1 1 1 var(--color-primary);
+        }
+
+        .navbar-toggler-icon {
+            background: none;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-toggler-icon span {
+            width: 30px;
+            height: 2px;
+            margin: 4px 0;
+            background: white;
+            transition: all .4s ease-in-out;
+        }
+    }
+
+    .navbar-toggler[aria-expanded='true'] .navbar-toggler-icon .a {
+        transform: rotate(45deg);
+        transform-origin: 1px;
+        transition: all .4s ease-in-out;
+    }
+
+    .navbar-toggler[aria-expanded='true'] .navbar-toggler-icon .b {
+        transform: scale(0);
+        transition: all .4s ease-in-out;
+    }
+
+    .navbar-toggler[aria-expanded='true'] .navbar-toggler-icon .c {
+        transform: rotate(-45deg);
+        transform-origin: 1px;
+        transition: all .4s ease-in-out;
+    }
+
+    /* Nav primary */
+    /* NAV */
+
+    /* SECCIÓN HERO */
+    .section-hero {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url('assets/img/hero-img.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        overflow: hidden;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(219, 228, 66, 0.4);
+            z-index: 0;
+        }
+
+        .row-hero {
+            height: 100vh;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 0;
+
+            h1,
+            p {
+                text-align: center;
+                color: var(--color-text-light);
+            }
+        }
+
+        .row-hero p {
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn.btn-primary.btn-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-radius: 100px;
+            border: 3px solid #fff;
+            background: transparent;
+            padding: 0.5rem 1.2rem;
+        }
+    }
+
+    /* SECCIÓN HERO */
+
+    /* MAIN */
+    .links-escuela .row-article {
+        article {
+            position: relative;
+            display: flex;
+            padding: 0;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, .8);
+                z-index: 0;
+            }
+
+            &:hover a {
+                outline: 1px solid #C4D600;
+                outline-offset: -2px;
+            }
+        }
+
+        .article-1 {
+            background-image: url(assets/img/links-escuela/fondo-ddhub.webp);
+        }
+
+        .article-2 {
+            background-image: url(assets/img/links-escuela/fondo-aplica_diseno.webp);
+        }
+
+        .article-3 {
+            background-image: url(assets/img/links-escuela/fondo-craed.webp);
+        }
+
+        .article-4 {
+            background-image: url(assets/img/links-escuela/fondo-rutas.webp);
+        }
+
+        .article-5 {
+            background-image: url(assets/img/links-escuela/fondo-premios.webp);
+        }
+
+        .article-6 {
+            background-image: url(assets/img/links-escuela/fondo-mentalidad.webp);
+        }
+
+        article a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem 0;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+
+            .box-img {
+                display: flex;
+                justify-content: center;
+                width: 5rem;
+
+                img {
+                    width: 100%;
+                    object-fit: cover;
+                }
+
+                .img-article-6 {
+                    width: 2rem;
+                }
+            }
+
+            h2 {
+                color: var(--color-text-light);
+            }
+        }
+    }
+
+    /* MAIN */
+
+    /* FOOTER */
+    footer {
+        background-color: #1A1A1A;
+        padding: 20px 40px;
+        position: relative;
+        z-index: 1;
+
+        .col {
+            padding: 20px 20px;
+        }
+
+        .box-title {
+            border-bottom: 1px solid var(--color-primary);
+            margin-bottom: 1rem;
+
+            .title-footer {
+                color: var(--color-primary);
+                border-bottom: 7px solid var(--color-primary);
+                width: max-content;
+                margin: 0;
+                padding-bottom: .4rem;
+                font-weight: 300;
+            }
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            a {
+                color: #fff;
+                transition: opacity 200ms ease;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+            }
+        }
+
+        .contain-img-footer {
+            border-top: solid 1px #fff;
+            padding-top: 20px;
+
+            .img-footer-1 {
+                width: 40%;
+                object-fit: cover;
+            }
+
+            .img-footer-2 {
+                width: 65%;
+                object-fit: contain;
+            }
+        }
+
+        .icon-footer {
+            padding-right: .5rem;
+        }
+    }
+
+    footer .column-1 {
+        color: var(--color-text-light);
+
+        .btn.btn-primary.btn-footer {
+            border-radius: 100px;
+            padding: 0.5rem 1.5rem;
+            border-color: rgba(255, 255, 255, .8);
+            color: rgba(255, 255, 255, .8);
+            background: transparent;
+            margin: 2rem 0;
+            transition: all .3s ease;
+
+            &:hover {
+                border-color: rgba(255, 255, 255, 1) !important;
+                color: rgba(255, 255, 255, 1);
+                opacity: 1;
+                background: rgba(0, 0, 0, .2) !important;
+                box-shadow: 0px 10px 7px rgba(0, 0, 0, 1);
+                transform: translateY(-10px);
+                background-color: rgba(0, 0, 0, .2) !important;
+            }
+        }
+
+        section {
+            border-bottom: 1px solid #fff;
+            margin: 0 10rem 0 0;
+            ;
+
+            h4,
+            h5 {
+                font-family: 'Open Sans';
+            }
+
+            .number-footer {
+                text-decoration: underline;
+                color: #fff;
+            }
+
+            ul {
+                gap: 0;
+
+                p {
+                    margin: 0;
+                }
+            }
+        }
+
+        .box-rrss {
+            border: none;
+            padding-bottom: 20px;
+        }
+    }
+
+    .footer-toggle {
+        transition: transform 0.3s ease;
+        background-color: transparent;
+        border: none;
+        border-bottom: solid 1px var(--color-primary);
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .title-footer {
+            color: var(--color-primary);
+            border-bottom: 7px solid var(--color-primary);
+            width: max-content;
+            margin: 0;
+            padding-bottom: .4rem;
+            font-weight: 300;
+        }
+
+        .chevron-icon {
+            stroke: var(--color-primary);
+        }
+    }
+
+    .footer-toggle.active-toggle {
+        transform: translateY(-10px);
+    }
+
+    .chevron-icon {
+        transition: transform 0.3s ease;
+    }
+
+    .footer-toggle.active-toggle .chevron-icon {
+        transform: rotate(180deg);
+    }
+
+    /* FOOTER */
+
+
+
+
+    @media (1199px < width < 1490px) {
+        .nav-primary {
+            justify-content: end;
+
+            .logo-nav {
+                display: none;
+            }
+
+            .nav-link {
+                padding: 1.4rem 0;
+            }
+        }
+    }
+
+    @media (width < 1200px) {
+        .navbar-brand-container {
+            background-color: #1A1A1A;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            .logo-nav-mobile {
+                display: block;
+                padding: 1rem;
+                min-width: 10rem;
+            }
+        }
+
+        .logo-nav {
+            display: none;
+        }
+
+        .navbar-collapse {
+            height: 100vh;
+            overflow-y: auto;
+            padding-bottom: 3.2rem;
+
+            .nav-secondary {
+                padding: 1rem;
+            }
+
+            .nav-secondary .navbar-nav .nav-item {
+                width: 100%;
+                display: flex;
+            }
+
+            .btn-nav-icon1,
+            .btn-nav-icon2 {
+                padding-left: 1rem;
+            }
+
+            .nav-primary .navbar-nav {
+                width: 100%;
+                padding: 1rem;
+                margin: 0 !important;
+                gap: .5rem;
+
+                .dropdown {
+                    flex-direction: column;
+
+                    .nav-link {
+                        width: 100%;
+                        display: flex;
+                        justify-content: start;
+                        align-items: center;
+                    }
+
+                    .dropdown-menu {
+                        border: none;
+                        width: 100%;
+                        flex-direction: column;
+                    }
+                }
+
+                .nav-destacado {
+                    padding: 0;
+                    margin: 0;
+
+                    .nav-link {
+                        padding-left: 1rem;
+                    }
+
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        footer .column-1 section {
+            margin: 0;
+        }
+    }
+
+    @media (width < 768px) {
+        footer .contain-img-footer {
+            .img-footer-1 {
+                width: 95%;
+                object-fit: cover;
+            }
+
+            .img-footer-2 {
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+</style>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-xl p-0">
+            <div class="navbar-brand-container">
+                <a href="https://www.duoc.cl/" target="_blank" class="logo-nav-mobile">
+                    <img src="assets/img/logo-duoc.svg" alt="Logo DuocUC" class="img-fluid">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
+                    aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <!-- <i data-feather="menu"></i> -->
+                        <span class="a"></span>
+                        <span class="b"></span>
+                        <span class="c"></span>
+                    </span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end flex-column" id="nav">
+                <div class="nav-secondary w-100">
+                    <ul class="navbar-nav flex-wrap justify-content-end align-items-center p-1 m-0">
+                        <li class="nav-item">
+                            <a target="_blank" href="https://www.duoc.cl/alumnos/" class="nav-link">ALUMNOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a target="_blank" href="https://www.duoc.cl/vida-estudiantil/titulados/"
+                                class="nav-link">TITULADOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a target="_blank" href="https://www.duoc.cl/docentes/" class="nav-link">DOCENTES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a target="_blank" href="https://www.duoc.cl/colaboradores/"
+                                class="nav-link">COLABORADORES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a target="_blank" href="https://campusvirtual.duoc.cl/ultra/institution-page"
+                                class="nav-link">AVA</a>
+                        </li>
+                        <li class="nav-item">
+                            <a target="_blank" href="https://www.duoc.cl/empresas/" class="nav-link">EMPRESAS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a target="_blank" href="https://bibliotecas.duoc.cl/inicio" class="nav-link">BIBLIOTECA</a>
+                        </li>
+                        <li class="nav-item">
+                            <a target="_blank" href="https://liceoandes.duoc.cl/" class="nav-link">LICEO ANDES</a>
+                        </li>
+                        <li class="nav-item btn-nav-icon1">
+                            <a target="_blank" href="https://www.duoc.cl/nosotros/donde-estamos/" class="nav-link">DÓNDE
+                                ESTAMOS</a>
+                        </li>
+                        <li class="nav-item btn-nav-icon2">
+                            <a target="_blank" href="https://www.duoc.cl/portal-de-pago/" class="nav-link">PAGO EN
+                                LÍNEA</a>
+                        </li>
+                        <li class="nav-item btn-nav-border ">
+                            <a target="_blank" href="https://experienciavivo.duoc.cl/index"
+                                class="nav-link">certificados</a>
+                        </li>
+                        <li class="nav-item btn-nav-bg ">
+                            <a target="_blank"
+                                href="https://admision.duoc.cl/?_ga=2.205431571.2048143334.1750108828-1990111743.1747092512"
+                                class="nav-link">MATRÍCULAS DUOC ONLINE</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-primary d-flex w-100">
+                    <a href="https://www.duoc.cl/" target="_blank" class="logo-nav"><img src="assets/img/logo-duoc.svg"
+                            alt="Logo DuocUC" class=""></a>
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="menu-item dropdown">
+                            <a href="https://www.duoc.cl/oferta-academica/" class="nav-link dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">Oferta Académica</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="javascript:void(0)" class="dropdown-item drop-submenu">Escuelas</a>
+                                    <ul class="sub-menu d-none flex-column">
+                                        <li>
+                                            <a target="_blank"
+                                                href="https://www.duoc.cl/escuela/administracion-negocios/"
+                                                class="dropdown-item">Adimistración y negocios</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="https://www.duoc.cl/escuela/comunicacion/"
+                                                class="dropdown-item">Comunicación</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="https://www.duoc.cl/escuela/construccion/"
+                                                class="dropdown-item">Construcción</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="https://www.duoc.cl/escuela/diseno/"
+                                                class="dropdown-item">Diseño</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="https://www.duoc.cl/escuela/gastronomia/"
+                                                class="dropdown-item">Gastronomía</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank"
+                                                href="https://www.duoc.cl/escuela/informatica-telecomunicaciones/"
+                                                class="dropdown-item">Informática y Telecomunicaciones</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank"
+                                                href="https://www.duoc.cl/escuela/ingenieria-recursos-naturales/"
+                                                class="dropdown-item">Ingeniería y Recursos Naturales</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="https://www.duoc.cl/escuela/salud/"
+                                                class="dropdown-item">Salud y Bienestar</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="https://www.duoc.cl/escuela/turismo/"
+                                                class="dropdown-item">Turismo y Hospitalidad</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/oferta-academica/carreras/"
+                                        class="dropdown-item">Carreras</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/duoconline/" class="dropdown-item">Duoc
+                                        Online</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/oferta-academica/cursos-diplomados/"
+                                        class="dropdown-item">Cursos y Diplomados</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/semestrecero/"
+                                        class="dropdown-item">Semestre Cero</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item dropdown">
+                            <a href="https://www.duoc.cl/vida-estudiantil/" class="nav-link dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">Vida Estudiantil</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/vida-estudiantil/"
+                                        class="dropdown-item">Vida Estudiantil</a>
+                                </li>
+                                <li>
+                                    <a target="_blank"
+                                        href="https://www.duoc.cl/vida-estudiantil/estrategia-de-apoyo-a-los-estudiantes/"
+                                        class="dropdown-item">Asuntos Estudiantiles</a>
+                                </li>
+                                <li>
+                                    <a target="_blank"
+                                        href="https://www.duoc.cl/vida-estudiantil/unidad-de-apoyo-y-bienestar-estudiantil/"
+                                        class="dropdown-item">Apoyo y bienestar estudiantil</a>
+                                </li>
+                                <li>
+                                    <a target="_blank"
+                                        href="https://www.duoc.cl/vida-estudiantil/convivencia-e-inclusion/"
+                                        class="dropdown-item">Convivencia e Inclusión</a>
+                                </li>
+                                <li>
+                                    <a target="_blank"
+                                        href="https://www.duoc.cl/vida-estudiantil/innovacion-emprendimiento/"
+                                        class="dropdown-item">Innovación & Emprendimiento</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/vida-estudiantil/deportes/"
+                                        class="dropdown-item">Deportes</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/vida-estudiantil/pastoral/"
+                                        class="dropdown-item">Pastoral</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/reintegros/"
+                                        class="dropdown-item">Reintegros</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/vida-estudiantil/titulados/"
+                                        class="dropdown-item">Titulados</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://inscripciones.duoc.cl/talleres-extracurriculares/"
+                                        class="dropdown-item">Talleres Extracurriculares</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/calendario-academico/"
+                                        class="dropdown-item">Calendario 2025</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item dropdown">
+                            <a target="_blank" href="https://extension.duoc.cl/" class="nav-link">Extensión</a>
+                        </li>
+                        <li class="menu-item dropdown">
+                            <a href="https://www.duoc.cl/nosotros/" class="nav-link dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">Nosotros</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/nosotros/sobre-duoc/"
+                                        class="dropdown-item">Sobre Duoc</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/nosotros/autoridades/"
+                                        class="dropdown-item">Autoridades</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/nosotros/donde-estamos/sedes/"
+                                        class="dropdown-item">Sedes y Campus</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/nosotros/calidad-acreditacion/"
+                                        class="dropdown-item">Calidad y Acreditación</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/nosotros/vinculacionconelmedio/"
+                                        class="dropdown-item">Vinculación con el Medio</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/nosotros/investigacion-aplicada/"
+                                        class="dropdown-item">Investigación Aplicada</a>
+                                </li>
+                                <li>
+                                    <a target="_blank"
+                                        href="https://www.duoc.cl/vida-estudiantil/innovacion-emprendimiento/"
+                                        class="dropdown-item">Innovación & Emprendimiento</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/internacionalizacion/"
+                                        class="dropdown-item">Internacionalización</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/proyectos-servicios/"
+                                        class="dropdown-item">Proyectos y Servicios</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/sala-de-prensa/"
+                                        class="dropdown-item">Sala de Prensa</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://observatorio.duoc.cl/"
+                                        class="dropdown-item">Observatorio Duoc UX</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/nosotros/sobre-duoc/transparencia/"
+                                        class="dropdown-item">Transparencia</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">Carreras Online</a>
+                            <ul class="dropdown-menu">
+                                <li><a target="_blank" href="https://www.duoc.cl/duoconline/"
+                                        class="dropdown-item">Admisión Duoc Online</a>
+                                </li>
+                                <li><a target="_blank" href="https://tuprimerpaso.duoc.cl/duoc-online/"
+                                        class="dropdown-item">Charlas de Orientación Carreras Online</a>
+                                </li>
+                                <li><a target="_blank" href="https://www.duoc.cl/bienvenida-duoc-online/"
+                                        class="dropdown-item">Bienvenida Alumnos matriculados</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item dropdown nav-destacado">
+                            <a href="https://www.duoc.cl/admision/" class="nav-link dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">Admisión</a>
+                            <ul class="dropdown-menu">
+                                <li class="destacado">
+                                    <a target="_blank" href="https://www.duoc.cl/admision/"
+                                        class="dropdown-item">Admisión Duoc UC</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/admision/proceso/especial/"
+                                        class="dropdown-item">Admisión Especial</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://tuprimerpaso.duoc.cl/" class="dropdown-item">Tu
+                                        Primer Paso</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.duoc.cl/contacto-admision/"
+                                        class="dropdown-item">Contáctanos</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="container-fluid section-hero">
+            <div class="row row-hero">
+                <div class="col col-md-6">
+                    <h1>Tu escuela de diseño a un click</h1>
+                    <p>Este es tu punto de partida para conocer toda la oferta digital qeu ponemos a tu dispodición. Te
+                        invitamos a seguirnos en redes sociales y a contarnos tuvisión del mundo</p>
+                    <div class="box-botton-header d-flex justify-content-center">
+                        <a class="btn btn-primary btn-header" role="button" target="_blank" href="https://www.duoc.cl/escuela/diseno/">Ir a La escuela de
+                            Diseño <i data-feather="chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <section class="container-fluid links-escuela">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-article">
+                <article class="col article-1">
+                    <a href="https://diseno.duoc.cl/ddhub/" target="_blank">
+                        <div class="box-img"><img src="assets/img/links-escuela/logo-ddhub.svg" alt="DDHUB"></div>
+                        <h2>DDHUB</h2>
+                    </a>
+                </article>
+                <article class="col article-2">
+                    <a href="https://aplicadiseno.cl/" target="_blank">
+                        <div class="box-img"><img src="assets/img/links-escuela/logo-aplica-diseno.svg"
+                                alt="Aplica Diseño"></div>
+                        <h2>Aplica Diseño</h2>
+                    </a>
+                </article>
+                <article class="col article-3">
+                    <a href="https://craed.cl/custom-login/" target="_blank">
+                        <div class="box-img"><img src="assets/img/links-escuela/logo-craed.png" alt="CREAD"></div>
+                        <h2>CRAED</h2>
+                    </a>
+                </article>
+                <article class="col article-4">
+                    <a href="http://rutasformativasedd.cl/" target="_blank">
+                        <div class="box-img"><img src="assets/img/links-escuela/logo-rutas-formativas.png"
+                                alt="Rutas Informativas"></div>
+                        <h2>Rutas Informativas</h2>
+                    </a>
+                </article>
+                <article class="col article-5">
+                    <a href="https://diseno.duoc.cl/premiosdd/" target="_blank">
+                        <div class="box-img"><img src="assets/img/links-escuela/logo-premios-dd.svg" alt="Premios DD">
+                        </div>
+                        <h2>Premios DD</h2>
+                    </a>
+                </article>
+                <article class="col article-6">
+                    <a href="https://open.spotify.com/show/1bRGGZeiI4ggpAZ63Sen4k?si=AWRkzLleTgaK0Q2RLR_sZQ&dl_branch=1&nd=1&dlsi=38d61be461104cc4" target="_blank">
+                        <div class="box-img"><img src="assets/img/links-escuela/logo-mentalidad.svg"
+                                alt="Mentalidad Digital" class="img-article-6"></div>
+                        <h2>Mentalidad Digital</h2>
+                    </a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-xl-3">
+                <!-- Contáctanos -->
+                <div class="col column-1">
+                    <button class="footer-toggle d-xl-none w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#footer-contacto"  aria-expanded="false">
+                        <h3 class="title-footer">Contáctanos</h3> <i data-feather="chevron-up" class="chevron-icon"></i>
+                    </button>
+                    <div class="collapse d-xl-block accordion-footer" id="footer-contacto">
+                        <div class="box-title d-none d-xl-block">
+                            <h3 class="title-footer">Contáctanos</h3>
+                        </div>
+                        <a class="btn btn-primary btn-footer" role="button" target="_blank" href="https://www.duoc.cl/contacto/">Contáctanos <i
+                                data-feather="chevron-right"></i></a>
+                        <section class="py-3">
+                            <h4 class="h5 font-weight-bold">Admisión</h4>
+                            <p class="mb-1">(+56) 227 120640</p>
+                            <p class="mb-0">WhatsApp: <a href="#" class="number-footer"><i
+                                        class="bi bi-whatsapp ms-2"></i>+56958142089</a></p>
+                        </section>
+                        <section class="py-3">
+                            <h4 class="h5 font-weight-bold">Cursos y Diplomados</h4>
+                            <p class="mb-1">(+56) 442201096</p>
+                            <p class="mb-0">(+56) 227120246</p>
+                        </section>
+                        <section class="py-3">
+                            <h4 class="h5 font-weight-bold">MESA DE SERVICIOS</h4>
+                            <p class="mb-1">WhatsApp: <a href="#" class="number-footer"><i
+                                        class="bi bi-whatsapp ms-2"></i>+56936639565</a></p>
+                            <ul class="p-0">
+                                <li>
+                                    <p>Servicios Académicos</p>
+                                </li>
+                                <li>
+                                    <p>Servicios de Financiamiento</p>
+                                </li>
+                                <li>
+                                    <p>Servicios de Vida Estudiantil</p>
+                                </li>
+                                <li>
+                                    <p>Servicios Tecnológicos</p>
+                                </li>
+                                <li>
+                                    <p>Otros Servicios</p>
+                                </li>
+                            </ul>
+                            <h5 class="h5 font-weight-bold">Teléfonos</h5>
+                            <p class="mb-1">(+56) 442 201 098</p>
+                            <p class="mb-0">(+56) 227 120 245</p>
+                        </section>
+                        <section class="pt-5 box-rrss">
+                            <div class="d-flex justify-content-between">
+                                <i data-feather="facebook"></i>
+                                <i data-feather="instagram"></i>
+                                <i data-feather="twitter"></i>
+                                <i data-feather="youtube"></i>
+                                <i data-feather="linkedin"></i>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <!-- Oferta Académica -->
+                <div class="col column-2">
+                    <button class="footer-toggle d-xl-none w-100 text-start mb-5" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#footer-carreras" aria-expanded="false">
+                        <h3 class="title-footer">Carreras</h3> <i data-feather="chevron-up"
+                            class="chevron-icon"></i>
+                    </button>
+                    <div class="collapse d-xl-block accordion-footer mb-5" id="footer-carreras">
+                        <div class="box-title d-none d-xl-block">
+                            <h3 class="title-footer">Carreras</h3>
+                        </div>
+                        <ul class="p-0">
+                            <li><a target="_blank" href="https://www.duoc.cl/carreras/ilustracion/">Ilustración</a></li>
+                            <li><a target="_blank" href="https://www.duoc.cl/carreras/desarrollo-diseno-web/">Desarrollo y Diseño Web</a></li>
+                            <li><a target="_blank" href="https://www.duoc.cl/carreras/diseno-ambientes/">Diseño de Ambientes</a></li>
+                            <li><a target="_blank" href="https://www.duoc.cl/carreras/diseno-industrial/">Diseño Industrial</a></li>
+                            <li><a target="_blank" href="https://www.duoc.cl/carreras/diseno-grafico/">Diseño Gráfico</a></li>
+                            <li><a target="_blank" href="https://www.duoc.cl/carreras/diseno-de-vestuario/">Diseño de Vestuario</a></li>
+                        </ul>
+                    </div>
+
+                    <button class="footer-toggle d-xl-none w-100 text-start " type="button" data-bs-toggle="collapse"
+                        data-bs-target="#footer-oferta" aria-expanded="false">
+                        <h3 class="title-footer">Oferta Académica</h3> <i data-feather="chevron-up"
+                            class="chevron-icon"></i>
+                    </button>
+                    <div class="collapse d-xl-block accordion-footer mb-5" id="footer-oferta">
+                        <div class="box-title d-none d-xl-block">
+                            <h3 class="title-footer">Oferta Académica</h3>
+                        </div>
+                        <ul class="p-0">
+                            <li><a target="_blank" href="https://www.duoc.cl/escuela/diseno/oferta-academica/">Carreras</a></li>
+                            <li><a target="_blank" href="https://www.duoc.cl/escuela/diseno/oferta-academica/cursos-y-diplomados/">Educación Contínua</a></li>
+                            <li><a target="_blank" href="http://www.rutasformativasedd.cl/">Rutas formativas</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Nosotros -->
+                <div class="col">
+                    <button class="footer-toggle d-xl-none w-100 text-start mb-5" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#footer-nosotros" aria-expanded="false">
+                        <h3 class="title-footer">Escuela de Diseño Duoc UC</h3> <i data-feather="chevron-up" class="chevron-icon"></i>
+                    </button>
+                    <div class="collapse d-xl-block accordion-footer mb-5" id="footer-nosotros" class="mb-5">
+                        <div class="box-title d-none d-xl-block">
+                            <h3 class="title-footer">Escuela de Diseño Duoc UC</h3>
+                        </div>
+                        <ul class="p-0">
+                            <li><a target="_blank" href="https://aplicadiseno.cl/">Aplica Diseño</a></li>             
+                            <li><a target="_blank" href="https://premiosdd.cl/">Premios DD</a></li>
+                            <li><a target="_blank" href="https://craed.cl/wp-login.php?redirect_to=https%3A%2F%2Fcraed.cl%2F&reauth=1">Craed</a></li>
+                            <li><a target="_blank" href="https://duoclaboral.cl/">Duoc Laboral</a></li>
+                            <li><a target="_blank" href="https://diseno.duoc.cl/ddhub/">DDHUB</a></li>
+                            <li><a target="_blank" href="https://open.spotify.com/show/1bRGGZeiI4ggpAZ63Sen4k?si=AWRkzLleTgaK0Q2RLR_sZQ&dl_branch=1&nd=1&dlsi=38d61be461104cc4">Mentalidad Digital Podcast</a></li>
+                            <li><a target="_blank" href="https://webezproxy.duoc.cl/login?url=https://www.materialconnexion.com">Material Connexion</a></li>
+                            <li><a target="_blank" href="https://duoccl0.sharepoint.com/sites/SOCIALIZACIONES">Comunidad Docente</a></li>
+                        </ul>
+                    </div>
+                    <button class="footer-toggle d-xl-none w-100 text-start mb-5" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#footer-enlaces" aria-expanded="false">
+                        <h3 class="title-footer">Redes Sociales</h3> <i data-feather="chevron-up"
+                            class="chevron-icon"></i>
+                    </button>
+                    <div class="collapse d-xl-block accordion-footer" id="footer-enlaces">
+                        <div class="box-title d-none d-xl-block">
+                            <h3 class="title-footer">Redes Sociales</h3>
+                        </div>
+                        <ul class="p-0">
+                            <li><a target="_blank" href="https://www.behance.net/DisenoDuocUC">Behance</a></li>
+                            <li><a target="_blank" href="https://www.youtube.com/c/DisenoDuocUC">Youtube</a></li>
+                            <li><a target="_blank" href="https://www.instagram.com/disenoduocuc/?hl=es">Instagram</a></li>
+                            <li><a target="_blank" href="https://web.facebook.com/EscuelaDisenoDuoc?_rdc=1&_rdr">Facebook</a></li>
+                            <li><a target="_blank" href="https://www.linkedin.com/showcase/titulados-escuela-de-dise%C3%B1o-duoc-uc/">Linkedin</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid contain-img-footer">
+            <div class="row justify-content-between">
+                <div class="col">
+                    <img src="assets/img/logo-duoc.svg" class="img-footer-1" alt="Duoc UC">
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <img src="assets/img/acreditacion.webp" class="img-footer-2" alt="7 Años acreditado">
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        //iconos
+        $(document).ready(function () {
+            feather.replace({
+                class: 'icon-small'
+            });
+        });
+
+        //NAV
+        $(document).ready(function () {
+            //sub-menu
+            $(".drop-submenu").click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                submenu = $(".sub-menu");
+                if (submenu.hasClass("d-none")) {
+                    submenu.removeClass("d-none").addClass("d-flex");
+                } else {
+                    submenu.removeClass("d-flex").addClass("d-none");
+                }
+            });
+        });
+
+        //NAV MOBILE intercambio de navs para lectores de pantallas 
+        //Cambio de navs al scrollear en desktop
+        //Columnas footer
+        function navScrollandResize() {
+            const ancho = $(window).width();
+            const scrollY = $(window).scrollTop();
+            const ninetyVH = $(window).height() * 0.3;
+            const logo = $(".logo-nav").children();
+
+            // Cambiar el orden según el ancho
+            if (ancho < 1200) {
+                //NAV MOBILE intercambio de navs para lectores de pantallas 
+                if (!$(".nav-primary").next().is(".nav-secondary")) {
+                    $(".nav-secondary").insertAfter(".nav-primary");
+                }
+                //Columnas footer
+                if ($(".column-2").children(".sub-column-2").length > 0) {
+                    $(".sub-column-2").insertAfter(".column-2");
+                    $(".sub-column-2").addClass('col');
+                }
+
+                $(".nav-secondary").show();
+                $(".nav-primary").css("background-color", "transparent");
+                $(logo).removeClass("logo-primary");
+            } else {
+                if (!$(".nav-secondary").next().is(".nav-primary")) {
+                    $(".nav-secondary").insertBefore(".nav-primary");
+                }
+                if (!$(".sub-colum-2").next().is(".column-2"))
+                    $(".sub-column-2").appendTo(".column-2");
+                $(".sub-column-2").removeClass('col');
+
+                //Cambio de navs al scrollear en desktop
+                if (scrollY > ninetyVH) {
+                    $(".nav-secondary").hide();
+                    $(".nav-primary").css({ "background-color": "#000" });
+                    $(logo).addClass("logo-primary");
+                } else {
+                    $(".nav-secondary").show();
+                    $(".nav-primary").css("background-color", "transparent");
+                    $(logo).removeClass("logo-primary");
+                }
+            }
+        }
+
+        // Ejecutar al cargar y al redimensionar
+        $(document).ready(navScrollandResize);
+        $(window).on("resize scroll", navScrollandResize);
+
+        //NAV
+
+        //FOOTER
+        $(document).ready(function () {
+            $(".footer-toggle").each(function () {
+                const $button = $(this);
+                const targetId = $button.attr("data-bs-target");
+                const $target = $(targetId);
+
+                $target.on("show.bs.collapse", function () {
+                    $button.addClass("active-toggle");
+                });
+
+                $target.on("hide.bs.collapse", function () {
+                    $button.removeClass("active-toggle");
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>
