@@ -170,6 +170,8 @@
 
             .logo-nav {
                 margin: 0 3.5rem 0 1rem;
+                display: flex;
+                align-items: center;
 
                 img {
                     width: 100%;
@@ -226,7 +228,7 @@
                     .dropdown-item {
                         color: #fff;
                         font-family: var(--typography-paragraph);
-                        font-size: var(--size-text);
+                        font-size: var(--size-paragraph);
 
                         &:hover {
                             color: #000;
@@ -1289,54 +1291,41 @@
             });
         });
 
-        //NAV MOBILE intercambio de navs para lectores de pantallas 
-        //Cambio de navs al scrollear en desktop
-        //Columnas footer
-        function navScrollandResize() {
+        function NavScrollAndResize() {
             const ancho = $(window).width();
             const scrollY = $(window).scrollTop();
             const ninetyVH = $(window).height() * 0.3;
             const logo = $(".logo-scroll");
 
-            // Cambiar el orden según el ancho
             if (ancho < 1200) {
-                //NAV MOBILE intercambio de navs para lectores de pantallas 
+                // NAV MOBILE: intercambio de navs para lectores de pantallas
                 if (!$(".nav-primary").next().is(".nav-secondary")) {
                     $(".nav-secondary").insertAfter(".nav-primary");
-                }
-                //Columnas footer
-                if ($(".column-2").children(".sub-column-2").length > 0) {
-                    $(".sub-column-2").insertAfter(".column-2");
-                    $(".sub-column-2").addClass('col');
                 }
 
                 $(".nav-secondary").show();
                 $(".nav-primary").css("background-color", "transparent");
             } else {
+                // NAV DESKTOP: orden correcto
                 if (!$(".nav-secondary").next().is(".nav-primary")) {
                     $(".nav-secondary").insertBefore(".nav-primary");
                 }
-                if (!$(".sub-colum-2").next().is(".column-2"))
-                    $(".sub-column-2").appendTo(".column-2");
-                $(".sub-column-2").removeClass('col');
-                
-                //Cambio de navs al scrollear en desktop
+
+                // Cambio de navs al scrollear en desktop
                 if (scrollY > ninetyVH) {
                     $(".nav-secondary").hide();
                     $(".nav-primary").css({ "background-color": "#000" });
-                    $(logo).addClass("logo-primary");
+                    $(logo).addClass("logo-primary").parent().css({"margin": "0 0 0 1rem"});
                 } else {
                     $(".nav-secondary").show();
                     $(".nav-primary").css("background-color", "transparent");
-                    $(logo).removeClass("logo-primary");
+                    $(logo).removeClass("logo-primary").parent().css({"margin": "0 3.5rem 0 1rem"});
                 }
             }
         }
 
-        // Ejecutar al cargar y al redimensionar
-        $(document).ready(navScrollandResize);
-        $(window).on("resize scroll", navScrollandResize);
-
+        $(document).ready(NavScrollAndResize);
+        $(window).on("resize scroll", NavScrollAndResize);
         //NAV
 
         //FOOTER
